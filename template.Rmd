@@ -1,0 +1,43 @@
+---
+title: "Simple document"
+author: Yixuan Jiao
+date: 2022-09-13
+output:
+  html_document: default
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+I'm an R Markdown document!
+
+```{r results = 'hide'}
+library(tidyverse)
+```
+
+# Section 1
+
+Here's a **code chunk** that samples from a *normal distribution*:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too! The mean is `r round(mean(samp),2)`.
+
+# Section 3
+
+Make a plot. Insert **code chunk**: opt + command + I
+
+```{r chunk_scatterplot}
+plot_df <- 
+  tibble(
+    x = rnorm(n = 1000),
+    y = 1 + 2 * x + rnorm(n =1000)
+  )
+
+ggplot(plot_df,aes(x = x, y = y)) + geom_point()
+```
