@@ -1,41 +1,39 @@
 ---
-title: "Simple document"
-author: Yixuan Jiao
-date: 2022-09-13
+title: "Data Import"
 output: github_document
-editor_options: 
-  chunk_output_type: console
 ---
 
-I'm an R Markdown document!
+##Data Import: CSVs
 
-```{r results = 'hide'}
-library(tidyverse)
-```
+Import data using `readr` pacakge
 
-# Section 1
-
-Here's a **code chunk** that samples from a *normal distribution*:
 
 ```{r}
-samp = rnorm(100)
-length(samp)
+library(readr)
+litter_df = read_csv('data_import_examples/FAS_litters.csv')
+litter_df = janitor::clean_names(litter_df)
 ```
 
-# Section 2
+Look at the data:
 
-I can take the mean of the sample, too! The mean is `r round(mean(samp),2)`.
-
-# Section 3
-
-Make a plot. Insert **code chunk**: opt + command + I
-
-```{r chunk_scatterplot}
-plot_df <- 
-  tibble(
-    x = rnorm(n = 1000),
-    y = 1 + 2 * x + rnorm(n =1000)
-  )
-
-ggplot(plot_df,aes(x = x, y = y)) + geom_point()
+```{r}
+litter_df
+head(litter_df)
+tail(litter_df)
 ```
+
+```{r}
+#View(litter_df)
+```
+
+```{r}
+skimr::skim(litter_df)
+```
+
+`read_csv` options:
+
+```{r}
+read_csv('data_import_examples/FAS_litters.csv',na = c("","NA",999,88), skip= 2)
+```
+
+
